@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import CountryDatalist from "./CountryDatalist";
+import AllCity from "./AllCity.jsx";
 
 export default function SearchBar() {
-  const [countryList, setCountryList] = useState(null);
+  const [countryData, setCountryData] = useState(null);
   const countryEl = useRef();
 
   async function handleCountrySearch() {
@@ -14,59 +15,49 @@ export default function SearchBar() {
       `https://api.openweathermap.org/data/2.5/weather?q=${selectedCountry}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
     );
     const data = res.data;
-    // console.log(data);
+    console.log(data);
 
-    const newCountryList = [
+    const newCountryData = [
       {
+        name: data.name,
         lon: data.coord.lon,
         lat: data.coord.lat,
         weather: data.weather[0].description,
         temp: data.main.temp,
       },
     ];
-    setCountryList(newCountryList);
+    setCountryData(newCountryData);
   }
 
-  function fetchCityWeather(lon, lat) {
-    console.log("Lon:", lon, ", Lat:", lat);
-  }
-
-  console.log(countryList);
+  console.log(countryData);
   return (
-    <div className="form-row">
-      {/* Search Input */}
-      <div className="col-8">
-        <input
-          type="search"
-          className="form-control"
-          placeholder="Enter a country"
-          list="countries"
-          ref={countryEl}
-        />
+    <>
+      <div className="form-row">
+        {/* Search Input */}
+        <div className="col-8">
+          <input
+            type="search"
+            className="form-control"
+            placeholder="Enter a country"
+            list="countries"
+            ref={countryEl}
+          />
+        </div>
+
+        {/* All Country Datalist */}
+        <CountryDatalist />
+
+        {/* Search Button */}
+        <button
+          className="btn btn-primary btn-md"
+          onClick={handleCountrySearch}
+        >
+          Search
+        </button>
       </div>
 
-      {/* All Country Datalist */}
-      <CountryDatalist />
-
-      {/* Search Button */}
-      <button className="btn btn-primary btn-md" onClick={handleCountrySearch}>
-        Search
-      </button>
-
       {/* Get Cities */}
-      {countryList &&
-        countryList.map((country, index) => (
-          <button
-            key={index}
-            className="btn btn-secondary btn-md"
-            onClick={(e) => {
-              e.preventDefault();
-              fetchCityWeather(country.lon, country.lat);
-            }}
-          >
-            Fetch more
-          </button>
-        ))}
-    </div>
+      <AllCity countryData={countryData} />
+    </>
   );
 }

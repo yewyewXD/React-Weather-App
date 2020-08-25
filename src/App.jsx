@@ -4,8 +4,8 @@ import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
-    <div className="App">
-      <div className="col-sm-3">
+    <div className="container">
+      <div className="d-flex justify-content-center align-items-center flex-column">
         <SearchBar />
       </div>
     </div>
