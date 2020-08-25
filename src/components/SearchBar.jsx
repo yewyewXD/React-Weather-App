@@ -1,25 +1,37 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import axios from "axios";
 import CountryDatalist from "./CountryDatalist";
 
 export default function SearchBar() {
+  const [countryList, setCountryList] = useState(null);
   const countryEl = useRef();
 
   async function handleCountrySearch() {
-    const selectedCountry = countryEl.current.value;
+    const selectedCountry = countryEl.current.value.toLowerCase();
     console.log("Selected Country:", selectedCountry);
 
-    const res = await fetch(
-      "https://parseapi.back4app.com/classes/Continentscountriescities_City?limit=4&order=cityId,country,name&keys=name,country,cityId",
-      {
-        headers: {
-          "X-Parse-Application-Id": "OnFZE2MGDk9qVwzeOxLS7oeBR9Oc0ZyrzRBGy2Vc",
-          "X-Parse-REST-API-Key": "QtabV9ysL0bRYBFQQJpnJaJmwo9S2ctaT2Z3RCva",
-        },
-      }
+    const res = await axios.post(
+      `https://api.openweathermap.org/data/2.5/weather?q=${selectedCountry}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
     );
-    console.log(res.data);
+    const data = res.data;
+    // console.log(data);
+
+    const newCountryList = [
+      {
+        lon: data.coord.lon,
+        lat: data.coord.lat,
+        weather: data.weather[0].description,
+        temp: data.main.temp,
+      },
+    ];
+    setCountryList(newCountryList);
   }
 
+  function fetchCityWeather(lon, lat) {
+    console.log("Lon:", lon, ", Lat:", lat);
+  }
+
+  console.log(countryList);
   return (
     <div className="form-row">
       {/* Search Input */}
@@ -40,6 +52,21 @@ export default function SearchBar() {
       <button className="btn btn-primary btn-md" onClick={handleCountrySearch}>
         Search
       </button>
+
+      {/* Get Cities */}
+      {countryList &&
+        countryList.map((country, index) => (
+          <button
+            key={index}
+            className="btn btn-secondary btn-md"
+            onClick={(e) => {
+              e.preventDefault();
+              fetchCityWeather(country.lon, country.lat);
+            }}
+          >
+            Fetch more
+          </button>
+        ))}
     </div>
   );
 }
