@@ -9,13 +9,13 @@ export default function SearchBar() {
 
   async function handleCountrySearch() {
     const selectedCountry = countryEl.current.value.toLowerCase();
-    console.log("Selected Country:", selectedCountry);
+    // console.log("Selected Country:", selectedCountry);
 
     const res = await axios.post(
       `https://api.openweathermap.org/data/2.5/weather?q=${selectedCountry}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
     );
     const data = res.data;
-    console.log(data);
+    // console.log(data);
 
     const newCountryData = [
       {
@@ -29,7 +29,7 @@ export default function SearchBar() {
     setCountryData(newCountryData);
   }
 
-  console.log(countryData);
+  // console.log(countryData);
   return (
     <>
       <div className="form-row">
