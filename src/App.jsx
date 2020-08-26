@@ -1,10 +1,9 @@
 import React from "react";
-import "./App.css";
 import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column">
+    <div className="w-100 text-center p-5">
       <SearchBar />
     </div>
   );

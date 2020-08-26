@@ -14,14 +14,15 @@ export default function AllCity({ countryData }) {
 
     const citiesData = res.data.list;
     setCities(citiesData);
+    // console.log(citiesData);
   }
 
   return (
-    <>
-      <div className="form-row">
+    <div className="row mt-5">
+      <div className="col-2">
         {countryData &&
           countryData.map((country, index) => (
-            <div className="row mt-3" key={index}>
+            <div className="form-row mt-3" key={index}>
               <button
                 className="btn btn-secondary btn-md mx-2"
                 onClick={(e) => {
@@ -34,9 +35,20 @@ export default function AllCity({ countryData }) {
             </div>
           ))}
       </div>
-
       {/* Render Each City */}
-      <City cities={cities} />
-    </>
+      {/* <City cities={cities} /> */}
+      <div className="col-10">
+        <div className="row">
+          {cities &&
+            cities.map((city, index) => (
+              <div className="col-3 p-3 bg-light" key={index}>
+                <p>name: {city.name}</p>
+                <p>temperature: {city.main.temp}</p>
+                <p>weather: {city.weather[0].main}</p>
+              </div>
+            ))}
+        </div>
+      </div>
+    </div>
   );
 }
