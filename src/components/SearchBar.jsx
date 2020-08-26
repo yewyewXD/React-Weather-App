@@ -23,8 +23,6 @@ export default function SearchBar() {
         name: data.name,
         lon: data.coord.lon,
         lat: data.coord.lat,
-        weather: data.weather[0].description,
-        temp: data.main.temp,
       });
       return newCountryData;
     });
@@ -34,27 +32,69 @@ export default function SearchBar() {
   return (
     <>
       {/* Search Input */}
-      <div className="form-row d-flex align-items-center justify-content-center">
-        <div className="col-4">
-          <input
-            type="search"
-            className="form-control"
-            placeholder="Enter a country"
-            list="countries"
-            ref={countryEl}
-          />
+      <form>
+        <div className="form-row d-flex align-items-center justify-content-center">
+          <div className="col-md-4">
+            <input
+              type="search"
+              className="form-control"
+              placeholder="Enter a country"
+              list="countries"
+              ref={countryEl}
+            />
+          </div>
+          {/* Search Button */}
+          <button
+            className="btn btn-primary btn-md mr-md-0 mr-auto ml-md-0 ml-1 mt-md-0 mt-3"
+            onClick={(e) => {
+              e.preventDefault();
+              handleCountrySearch();
+            }}
+          >
+            Search
+          </button>
         </div>
-        {/* Search Button */}
-        <button
-          className="btn btn-primary btn-md"
-          onClick={handleCountrySearch}
-        >
-          Search
-        </button>
-      </div>
-
+      </form>
       {/* All Country Datalist */}
       <CountryDatalist />
+
+      {/* Weather Condition */}
+      <div className="row mt-3 d-flex align-items-md-start align-items-center justify-content-center overflow-auto">
+        <span className="p-2 border-dark">
+          Clear Sky{" "}
+          <img src={`http://openweathermap.org/img/wn/01d@2x.png`} alt="" />
+        </span>
+
+        <span className="p-2 border-dark">
+          Clouds{" "}
+          <img src={`http://openweathermap.org/img/wn/02d@2x.png`} alt="" />
+        </span>
+
+        <span className="p-2 border-dark">
+          Mist{" "}
+          <img src={`http://openweathermap.org/img/wn/50d@2x.png`} alt="" />
+        </span>
+
+        <span className="p-2 border-dark">
+          Snow{" "}
+          <img src={`http://openweathermap.org/img/wn/13d@2x.png`} alt="" />
+        </span>
+
+        <span className="p-2 border-dark">
+          Drizzle{" "}
+          <img src={`http://openweathermap.org/img/wn/09d@2x.png`} alt="" />
+        </span>
+
+        <span className="p-2 border-dark">
+          Rain{" "}
+          <img src={`http://openweathermap.org/img/wn/10d@2x.png`} alt="" />
+        </span>
+
+        <span className="p-2 border-dark">
+          Thunderstorm{" "}
+          <img src={`http://openweathermap.org/img/wn/11d@2x.png`} alt="" />
+        </span>
+      </div>
 
       {/* Get Cities */}
       <AllCity countryData={countryData} />

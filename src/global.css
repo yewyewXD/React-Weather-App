@@ -1,27 +1,31 @@
-.eachCity {
-  min-height: 200px;
-  min-width: 200px;
+body {
+  font-family: sans-serif !important;
 }
-
-.cityTemperature {
+.eachCity {
+  height: 240px;
+  width: 240px;
+}
+.cityTemperature,
+.weatherIcon {
   height: 30px;
   width: 30px;
+  padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   color: white;
 }
-
 .weatherIcon {
-  width: 30px;
-  height: 30px;
+  height: 60px;
+  width: 60px;
 }
-
+.weatherIcon img {
+  width: 100%;
+}
 .hot {
   background: red;
 }
-
 .cold {
   background: blue;
 }

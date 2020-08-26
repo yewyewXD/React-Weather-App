@@ -19,33 +19,36 @@ export default function AllCity({ countryData }) {
   }
 
   return (
-    <div className="row mt-5">
-      <div className="col-2">
-        {countryData &&
-          countryData.map((country, index) => (
-            <div className="form-row mt-3" key={index}>
+    <div className="row d-flex align-items-md-start align-items-center justify-content-center mt-5">
+      <div className="col-md-2">
+        <h2>Weather in:</h2>
+
+        <div className="list-group d-flex flex-md-column flex-row overflow-auto">
+          {countryData &&
+            countryData.map((country, index) => (
               <button
-                className="btn btn-secondary btn-md mx-2"
+                key={index}
+                className="list-group-item list-group-item-action border"
                 onClick={(e) => {
                   e.preventDefault();
                   fetchCityWeather(country.lon, country.lat);
                 }}
               >
-                See more in {country.name}
+                {country.name}
               </button>
-            </div>
-          ))}
+            ))}
+        </div>
       </div>
       {/* Render Each City */}
-      <div className="col-10">
-        <div className="row d-flex flex-wrap">
+      <div className="col-10 ">
+        <div className="row d-flex justify-content-center flex-wrap">
           {cities &&
             cities.map((city, index) => (
               <div
                 className="m-3 p-3 bg-light d-flex align-items-center justify-content-center flex-column eachCity"
                 key={index}
               >
-                <h1>{city.name}</h1>
+                <h3 className="mb-4">{city.name}</h3>
                 <div className="d-flex align-items-center justify-content-center">
                   <p className="m-0 pr-2">Temperature:</p>
                   <span
@@ -57,9 +60,8 @@ export default function AllCity({ countryData }) {
 
                 <div className="d-flex align-items-center justify-content-center">
                   <p className="m-0 pr-2">Weather: {city.weather[0].main}</p>
-                  <span>
+                  <span className="weatherIcon">
                     <img
-                      className="weatherIcon"
                       src={`http://openweathermap.org/img/wn/${city.weather[0].icon}@2x.png`}
                       alt=""
                     />
