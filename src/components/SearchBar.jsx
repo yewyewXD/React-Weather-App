@@ -15,7 +15,7 @@ export default function SearchBar() {
       `https://api.openweathermap.org/data/2.5/weather?q=${selectedCountry}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
     );
     const data = res.data;
-    // console.log(data);
+    console.log(data);
 
     setCountryData((prevData) => {
       const newCountryData = [...prevData];

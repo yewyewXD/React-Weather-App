@@ -1,0 +1,27 @@
+.eachCity {
+  min-height: 200px;
+  min-width: 200px;
+}
+
+.cityTemperature {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+}
+
+.weatherIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.hot {
+  background: red;
+}
+
+.cold {
+  background: blue;
+}

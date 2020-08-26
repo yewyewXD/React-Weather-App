@@ -1,4 +1,5 @@
 import React from "react";
+import "./global.css";
 import SearchBar from "./components/SearchBar";
 
 function App() {
