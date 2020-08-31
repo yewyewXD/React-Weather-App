@@ -1,5 +1,6 @@
 import React from "react";
 import "./global.css";
+import "bootstrap/dist/css/bootstrap.css";
 import SearchBar from "./components/SearchBar";
 
 function App() {

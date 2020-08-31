@@ -63,37 +63,37 @@ export default function SearchBar() {
         <div className="col-10 d-flex align-items-center justify-content-center flex-wrap">
           <div className="p-2">
             Clear Sky{" "}
-            <img src={`http://openweathermap.org/img/wn/01d@2x.png`} alt="" />
+            <img src={`https://openweathermap.org/img/wn/01d@2x.png`} alt="" />
           </div>
 
           <div className="p-2">
             Clouds{" "}
-            <img src={`http://openweathermap.org/img/wn/02d@2x.png`} alt="" />
+            <img src={`https://openweathermap.org/img/wn/02d@2x.png`} alt="" />
           </div>
 
           <div className="p-2">
             Mist{" "}
-            <img src={`http://openweathermap.org/img/wn/50d@2x.png`} alt="" />
+            <img src={`https://openweathermap.org/img/wn/50d@2x.png`} alt="" />
           </div>
 
           <div className="p-2">
             Snow{" "}
-            <img src={`http://openweathermap.org/img/wn/13d@2x.png`} alt="" />
+            <img src={`https://openweathermap.org/img/wn/13d@2x.png`} alt="" />
           </div>
 
           <div className="p-2">
             Drizzle{" "}
-            <img src={`http://openweathermap.org/img/wn/09d@2x.png`} alt="" />
+            <img src={`https://openweathermap.org/img/wn/09d@2x.png`} alt="" />
           </div>
 
           <div className="p-2">
             Rain{" "}
-            <img src={`http://openweathermap.org/img/wn/10d@2x.png`} alt="" />
+            <img src={`https://openweathermap.org/img/wn/10d@2x.png`} alt="" />
           </div>
 
           <div className="p-2">
             Thunderstorm{" "}
-            <img src={`http://openweathermap.org/img/wn/11d@2x.png`} alt="" />
+            <img src={`https://openweathermap.org/img/wn/11d@2x.png`} alt="" />
           </div>
         </div>
       </div>

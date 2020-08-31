@@ -10,7 +10,7 @@ export default function AllCity({ countryData }) {
     // console.log("Lon:", lon, ", Lat:", lat);
 
     const res = await axios.post(
-      `http://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=50&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
+      `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=50&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
     );
 
     const citiesData = res.data.list;
@@ -62,7 +62,7 @@ export default function AllCity({ countryData }) {
                   <p className="m-0 pr-2">Weather: {city.weather[0].main}</p>
                   <span className="weatherIcon">
                     <img
-                      src={`http://openweathermap.org/img/wn/${city.weather[0].icon}@2x.png`}
+                      src={`https://openweathermap.org/img/wn/${city.weather[0].icon}@2x.png`}
                       alt=""
                     />
                   </span>
