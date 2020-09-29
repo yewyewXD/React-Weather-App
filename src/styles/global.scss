@@ -30,3 +30,16 @@ body {
 .cold {
   background: blue;
 }
+
+.all-center {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.all-center-column {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

@@ -1,0 +1,41 @@
+.search-page {
+  .main-display {
+    height: 50vh;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url("../images/winter.jpg") center;
+    background-size: cover;
+    border-bottom: 5px solid;
+    border-image: linear-gradient(45deg, #bcc1f8, #3ef1ee) 1;
+  }
+
+  .cities {
+    height: 100vh;
+
+    .city-row {
+      &:first-child .city {
+        &:nth-child(even) {
+          border-bottom: 5px solid;
+        }
+        &:nth-child(odd) {
+          border-top: 5px solid;
+        }
+        &:first-child {
+          border: none;
+        }
+      }
+
+      &:last-child .city:nth-child(odd) {
+        border-bottom: 5px solid;
+      }
+
+      .city-title {
+        background: linear-gradient(to bottom right, #bcc1f8, #bcc1f8, #3ef1ee);
+      }
+
+      .city {
+        height: 49vh;
+        border-image: linear-gradient(45deg, #bcc1f8, #3ef1ee) 1;
+      }
+    }
+  }
+}

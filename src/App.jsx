@@ -1,16 +1,27 @@
 import React from "react";
-import "./global.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { GlobalProvider } from "./context/GlobalState";
+
+// styles
 import "bootstrap/dist/css/bootstrap.css";
-import SearchBar from "./components/SearchBar";
+import "./styles/global.scss";
+import "./styles/LandingStyles.scss";
+import "./styles/SearchStyles.scss";
+
+// pages
+import SearchPage from "./pages/SearchPage";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
-    <div className="w-100 text-center p-5">
-      <h1>React Weather App</h1>
-      <p className="mb-3">Get weather in major cities of a country</p>
-
-      <SearchBar />
-    </div>
+    <BrowserRouter>
+      <GlobalProvider>
+        <Switch>
+          <Route path="/" exact component={LandingPage} />
+          <Route path="/search" component={SearchPage} />
+        </Switch>
+      </GlobalProvider>
+    </BrowserRouter>
   );
 }
 
