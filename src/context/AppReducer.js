@@ -4,7 +4,11 @@ export default (state, action) => {
       return {
         ...state,
         countryData: action.payload,
-        countryDataLoading: false,
+      };
+    case "SEARCH_CITIES":
+      return {
+        ...state,
+        citiesData: action.payload,
       };
 
     default:

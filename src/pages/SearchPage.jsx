@@ -1,18 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MainDisplay from "../components/Search/MainDisplay";
-import { FaCity } from "react-icons/fa";
 import { GlobalContext } from "../context/GlobalState";
+import Cities from "../components/Search/Cities";
 
 export default function SearchPage() {
-  const { countryData, searchCities } = useContext(GlobalContext);
-
-  if (countryData) {
-    searchCities(countryData.latitude, countryData.longitude);
-  }
+  const { countryData } = useContext(GlobalContext);
 
   return (
-    <main className="search-page">
+    <main className="search-page bg-dark">
       {/* banner */}
       <div className="banner bg-dark text-white pl-5 py-4">
         <Link className="text-light" to="/">
@@ -49,38 +45,7 @@ export default function SearchPage() {
       </div>
 
       {/* cities */}
-      <div className="cities text-white">
-        <div className="row city-row">
-          <div className="city city-title col-xl-3 col-md-6 bg-dark all-center-column">
-            <FaCity size="5em" />
-            <div className="display-4 mt-3">Cities</div>
-          </div>
-          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
-            testing
-          </div>
-          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
-            testing
-          </div>
-          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
-            testing
-          </div>
-        </div>
-
-        <div className="row city-row">
-          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
-            testing
-          </div>
-          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
-            testing
-          </div>
-          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
-            testing
-          </div>
-          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
-            testing
-          </div>
-        </div>
-      </div>
+      <Cities />
     </main>
   );
 }
