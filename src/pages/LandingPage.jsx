@@ -5,15 +5,11 @@ import { GlobalContext } from "../context/GlobalState";
 
 export default function LandingPage() {
   const countryElRef = useRef();
-  const { searchCountry, countryDataLoading } = useContext(GlobalContext);
+  const { searchCountry } = useContext(GlobalContext);
 
   async function handleCountrySearch() {
     const country = countryElRef.current.value;
     searchCountry(country);
-    countryElRef.current.value = "";
-    if (!countryDataLoading) {
-      window.location.href = "/search";
-    }
   }
 
   return (
@@ -34,12 +30,13 @@ export default function LandingPage() {
               ref={countryElRef}
             />
 
-            <button
+            <Link
               className="btn btn-lg text-white"
               onClick={handleCountrySearch}
+              to="/search"
             >
               <GoSearch />
-            </button>
+            </Link>
           </div>
 
           {/* search filter */}

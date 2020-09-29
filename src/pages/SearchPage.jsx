@@ -1,8 +1,16 @@
-import React from "react";
-import SearchBar from "../components/SearchBar";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import MainDisplay from "../components/Search/MainDisplay";
+import { FaCity } from "react-icons/fa";
+import { GlobalContext } from "../context/GlobalState";
 
 export default function SearchPage() {
+  const { countryData, searchCities } = useContext(GlobalContext);
+
+  if (countryData) {
+    searchCities(countryData.latitude, countryData.longitude);
+  }
+
   return (
     <main className="search-page">
       {/* banner */}
@@ -16,24 +24,16 @@ export default function SearchPage() {
         </Link>
         <span className="mx-2">/</span>
         <Link className="text-light" to="/search">
-          Europe
+          {countryData ? countryData.name : ""}
         </Link>
       </div>
 
       {/* main display */}
-      <div className="main-display py-5 all-center">
-        <div className="container d-flex justify-content-end">
-          <span className="caption text-white text-center all-center-column">
-            <div className="h4 date">Wed Dec 04</div>
-            <div className="display-1 temperature">3&deg;C</div>
-            <div className="h4 weather">Mostly Cloudy</div>
-          </span>
-        </div>
-      </div>
+      <MainDisplay countryData={countryData} />
 
       {/* country overview  */}
       <div className="country-overview p-5 bg-dark text-white">
-        <h1>Switzerland</h1>
+        <h1> {countryData ? countryData.name : ""}</h1>
         <p className="text-muted">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
           assumenda nobis maiores error, necessitatibus, maxime dolores libero,
@@ -51,37 +51,36 @@ export default function SearchPage() {
       {/* cities */}
       <div className="cities text-white">
         <div className="row city-row">
-          <div className="city city-title col-lg-3 col-md-6 bg-dark all-center-column">
-            <h1>testing</h1>
+          <div className="city city-title col-xl-3 col-md-6 bg-dark all-center-column">
+            <FaCity size="5em" />
+            <div className="display-4 mt-3">Cities</div>
           </div>
-          <div className="city col-lg-3 col-md-6 bg-dark all-center-column">
+          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
             testing
           </div>
-          <div className="city col-lg-3 col-md-6 bg-dark all-center-column">
+          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
             testing
           </div>
-          <div className="city col-lg-3 col-md-6 bg-dark all-center-column">
+          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
             testing
           </div>
         </div>
 
         <div className="row city-row">
-          <div className="city col-lg-3 col-md-6 bg-dark all-center-column">
+          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
             testing
           </div>
-          <div className="city col-lg-3 col-md-6 bg-dark all-center-column">
+          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
             testing
           </div>
-          <div className="city col-lg-3 col-md-6 bg-dark all-center-column">
+          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
             testing
           </div>
-          <div className="city col-lg-3 col-md-6 bg-dark all-center-column">
+          <div className="city col-xl-3 col-md-6 bg-dark all-center-column">
             testing
           </div>
         </div>
       </div>
-
-      <SearchBar />
     </main>
   );
 }

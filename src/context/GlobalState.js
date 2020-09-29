@@ -21,19 +21,59 @@ export const GlobalProvider = ({ children }) => {
       );
       const { data } = res;
 
+      const newTimezone = data.timezone / 3600;
+
       const newCountryData = {
         name: data.name,
+        longitude: data.coord.lon,
+        latitude: data.coord.lat,
         temperature: data.main.temp,
         weather: data.weather[0].main,
         weatherDetail: data.weather[0].description,
+        timezone: `GMT${newTimezone > 0 ? " +" : " "}${newTimezone}`,
       };
 
-      console.log(newCountryData);
+      // console.log(newCountryData);
 
       dispatch({
         type: "SEARCH_COUNTRY",
         payload: newCountryData,
       });
+    } catch (err) {
+      console.log(err);
+      alert("Invalid country");
+      dispatch({
+        type: "SEARCH_ERROR",
+        payload: "Search Error",
+      });
+    }
+  }
+
+  async function searchCities(lat, lon) {
+    try {
+      const res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=8&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
+      );
+      const { data } = res;
+
+      // const newTimezone = data.timezone / 3600;
+
+      // const newCountryData = {
+      //   name: data.name,
+      //   longitude: data.coord.lon,
+      //   latitude: data.coord.lat,
+      //   temperature: data.main.temp,
+      //   weather: data.weather[0].main,
+      //   weatherDetail: data.weather[0].description,
+      //   timezone: `GMT${newTimezone > 0 ? " +" : " "}${newTimezone}`,
+      // };
+
+      console.log(data);
+
+      // dispatch({
+      //   type: "SEARCH_COUNTRY",
+      //   payload: newCountryData,
+      // });
     } catch (err) {
       console.log(err);
       alert("Invalid country");
@@ -50,6 +90,7 @@ export const GlobalProvider = ({ children }) => {
         countryData: state.countryData,
         countryDataLoading: state.countryDataLoading,
         searchCountry,
+        searchCities,
       }}
     >
       {children}
