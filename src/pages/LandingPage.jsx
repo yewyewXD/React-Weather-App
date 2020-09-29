@@ -5,11 +5,11 @@ import { GlobalContext } from "../context/GlobalState";
 
 export default function LandingPage() {
   const countryElRef = useRef();
-  const { searchPlace } = useContext(GlobalContext);
+  const { searchCountry } = useContext(GlobalContext);
 
   async function handleCountrySearch() {
     const country = countryElRef.current.value;
-    searchPlace(country);
+    searchCountry(country);
   }
 
   return (

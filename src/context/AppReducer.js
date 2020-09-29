@@ -1,14 +1,14 @@
 export default (state, action) => {
   switch (action.type) {
-    case "SEARCH_COUNTRY":
+    case "SEARCH_PLACE":
       return {
         ...state,
-        countryData: action.payload,
+        placeData: action.payload,
       };
-    case "SEARCH_CITIES":
+    case "SEARCH_NEARBY":
       return {
         ...state,
-        citiesData: action.payload,
+        nearbyData: action.payload,
       };
 
     default:

@@ -5,7 +5,7 @@ import { GlobalContext } from "../context/GlobalState";
 import Cities from "../components/Search/Cities";
 
 export default function SearchPage() {
-  const { countryData } = useContext(GlobalContext);
+  const { placeData } = useContext(GlobalContext);
 
   return (
     <main className="search-page bg-dark">
@@ -20,16 +20,16 @@ export default function SearchPage() {
         </Link>
         <span className="mx-2">/</span>
         <Link className="text-light" to="/search">
-          {countryData ? countryData.name : ""}
+          {placeData ? placeData.name : ""}
         </Link>
       </div>
 
       {/* main display */}
-      <MainDisplay countryData={countryData} />
+      <MainDisplay placeData={placeData} />
 
       {/* country overview  */}
       <div className="country-overview p-5 bg-dark text-white">
-        <h1> {countryData ? countryData.name : ""}</h1>
+        <h1> {placeData ? placeData.name : ""}</h1>
         <p className="text-muted">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
           assumenda nobis maiores error, necessitatibus, maxime dolores libero,
