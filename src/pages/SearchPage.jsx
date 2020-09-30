@@ -32,8 +32,14 @@ export default function SearchPage() {
       {/* country overview  */}
       <div className="country-overview py-5 bg-dark text-white">
         <div className="container">
-          <h1 className="mb-3"> {placeData ? placeData.name : ""}</h1>
-          <p className="text-muted">
+          <div className="title light mb-2">
+            {" "}
+            {placeData ? placeData.name : ""}
+          </div>
+          <div className="subtitle semi-bold mb-3 text-muted">
+            Timezone: {placeData ? placeData.timezone : ""}
+          </div>
+          <p className="description text-muted">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
             assumenda nobis maiores error, necessitatibus, maxime dolores
             libero, quo natus nam labore neque atque dignissimos unde delectus

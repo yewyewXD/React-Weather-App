@@ -1,12 +1,14 @@
 import React from "react";
 
 export default function MainDisplay({ placeData }) {
+  const background =
+    "https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1383&q=80";
   return (
     <div
-      className={`main-display py-5 all-center ${
-        placeData ? "active" : "inactive"
-      }`}
+      className="main-display py-5 all-center"
+      style={{ backgroundImage: `url(${background})` }}
     >
+      <div className="overlay w-100 position-absolute"></div>
       <div
         className={`container ${
           placeData
@@ -18,11 +20,10 @@ export default function MainDisplay({ placeData }) {
           {/* If we have data */}
           {placeData && (
             <>
-              <div className="h4 date">Wed Dec 04</div>
-              <div className="display-1 temperature">
+              <div className="title bold temperature">
                 {Math.round(placeData.temperature)}&deg;C
               </div>
-              <div className="h4 weather">{placeData.weather}</div>
+              <div className="subtitle light weather">{placeData.weather}</div>
             </>
           )}
 

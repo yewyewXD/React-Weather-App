@@ -1,15 +1,49 @@
 .search-page {
   .main-display {
     height: 50vh;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-      url("../images/winter.jpg") center;
+    background-position: center;
     background-size: cover;
     border-bottom: 5px solid;
     border-image: linear-gradient(45deg, #bcc1f8, #3ef1ee) 1;
+
+    .overlay {
+      height: 50vh;
+      background: black;
+      opacity: 0.6;
+    }
+
+    .caption {
+      z-index: 0;
+      .title {
+        font-size: 8rem;
+        line-height: 9rem;
+      }
+      .subtitle {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .country-overview {
+    .title {
+      font-size: 3rem;
+    }
   }
 
   .cities {
     height: 100vh;
+
+    .nearby-city {
+      background: linear-gradient(to bottom right, #bcc1f8, #bcc1f8, #3ef1ee);
+      cursor: initial !important;
+      border: none !important;
+      .icon {
+        font-size: 5rem;
+      }
+      .title {
+        font-size: 3rem;
+      }
+    }
 
     .city-row {
       &:first-child .city {
@@ -24,45 +58,49 @@
       &:last-child .city:nth-child(odd) {
         border-bottom: 5px solid;
       }
+    }
 
-      .city-title {
-        background: linear-gradient(to bottom right, #bcc1f8, #bcc1f8, #3ef1ee);
-        cursor: initial !important;
-        border: none !important;
+    .city {
+      height: 50vh;
+      border-image: linear-gradient(to right, #bcc1f8, #bcc1f8, #3ef1ee) 1;
+      cursor: pointer;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+
+      .caption {
+        .title {
+          font-size: 5.5rem;
+        }
+        .subtitle {
+          font-size: 1.3rem;
+        }
       }
 
-      .city {
-        height: 50vh;
-        border-image: linear-gradient(to right, #bcc1f8, #bcc1f8, #3ef1ee) 1;
-        cursor: pointer;
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
+      .overlay {
+        position: absolute;
+        background-image: linear-gradient(
+          to bottom right,
+          #bcc1f8,
+          #bcc1f8,
+          #3ef1ee
+        );
+        opacity: 0;
+        transition: 0.3s;
+      }
 
-        .overlay {
-          position: absolute;
-          background-image: linear-gradient(
-            to bottom right,
-            #bcc1f8,
-            #bcc1f8,
-            #3ef1ee
-          );
-          opacity: 0;
-          transition: 0.3s;
-        }
+      &:hover .overlay {
+        opacity: 1;
+      }
 
-        &:hover .overlay {
-          opacity: 1;
-        }
-
-        .caption {
-          z-index: 0;
-        }
+      .caption {
+        z-index: 0;
       }
     }
   }
 }
 
+// bootstrap xl breakpoint
 @media (max-width: 1199.98px) {
   .search-page {
     .cities {
@@ -75,6 +113,7 @@
   }
 }
 
+// bootstrap md breakpoint
 @media (max-width: 767.98px) {
   .search-page {
     .cities {
