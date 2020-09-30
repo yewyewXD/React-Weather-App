@@ -2,8 +2,8 @@
 
 ## Description
 
-V1: A weather web application which shows weather of countries all around the world.
-V2: A weather search app which allows to get a place's and its nearby cities' weather & temperature.
+V1: A weather web application which shows weather of countries all around the world. <br>
+V2: A weather search app which allows to get a place's and its nearby cities' weather & temperature.<br>
 
 ## Build status
 
@@ -17,8 +17,8 @@ Last modified on: 30 September 2020 (V2)<br>
 
 ## Screenshots (V1 and V2)
 
-![Search country](https://github.com/yewyewXD/React-Weather-App/blob/master/readme-images/select.png?raw=true "Search country") <br>
-![Display weather of cities](https://github.com/yewyewXD/React-Weather-App/blob/master/readme-images/render.png?raw=true "Display weather of cities")<br>
+![Search country](https://github.com/yewyewXD/React-Weather-App/blob/master/readme-images/select.png?raw=true "Search country")
+![Display weather of cities](https://github.com/yewyewXD/React-Weather-App/blob/master/readme-images/render.png?raw=true "Display weather of cities")<br><br>
 
 ![Landing page](https://github.com/yewyewXD/React-Weather-App/blob/master/readme-images/landing.JPG?raw=true "Landing page")
 ![Upper part of search result page](https://github.com/yewyewXD/React-Weather-App/blob/master/readme-images/searchPage1.JPG?raw=true "Upper part of search result page")
@@ -27,6 +27,7 @@ Last modified on: 30 September 2020 (V2)<br>
 ## Tech/framework used
 
 - React.js
+- Sass
 
 ## Features
 
@@ -41,6 +42,7 @@ First, clone the repository, then:
 
 ```bash
 cd React-Weather-App
+
 npm i
 ```
 
@@ -52,10 +54,10 @@ npm start
 
 ## API Reference
 
-[Current Weather API](https://openweathermap.org/current)
-[REST Countries API](https://restcountries.eu/)
+[Current Weather API](https://openweathermap.org/current) <br>
+[REST Countries API](https://restcountries.eu/) <br>
 
 ## Credits
 
-Initiative Inspiration: Angel John
-[Design Inspiration](https://www.behance.net/gallery/12748107/Weather-Dashboard-Global-Outlook)
+Initiative Inspiration: Angel John <br>
+[Design Inspiration](https://www.behance.net/gallery/12748107/Weather-Dashboard-Global-Outlook) <br>
