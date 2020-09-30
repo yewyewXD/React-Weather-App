@@ -20,6 +20,7 @@ export default function MainDisplay({ placeData }) {
           {/* If we have data */}
           {placeData && (
             <>
+              <div className="subtitle light place-name">{placeData.name}</div>
               <div className="title bold temperature">
                 {Math.round(placeData.temperature)}&deg;C
               </div>
@@ -28,7 +29,9 @@ export default function MainDisplay({ placeData }) {
           )}
 
           {/* If we don't have data */}
-          {!placeData && <h1>The search result is empty</h1>}
+          {!placeData && (
+            <div className="subtitle semi-bold">The search result is empty</div>
+          )}
         </span>
       </div>
     </div>

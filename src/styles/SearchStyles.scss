@@ -104,9 +104,8 @@
 @media (max-width: 1199.98px) {
   .search-page {
     .cities {
-      height: 100vh;
-
       .city {
+        height: 50vw;
         border: none !important;
       }
     }
@@ -114,13 +113,52 @@
 }
 
 // bootstrap md breakpoint
-@media (max-width: 767.98px) {
+@media (max-width: 575.98px) {
   .search-page {
+    .main-display {
+      .caption {
+        .title {
+          font-size: 6rem;
+          line-height: 7rem;
+        }
+        .subtitle {
+          font-size: 1.7rem;
+        }
+      }
+    }
+
+    .country-overview {
+      .title {
+        font-size: 2.5rem;
+      }
+    }
+
     .cities {
       .city {
-        height: 100vw !important;
+        height: 100vw;
         border-bottom: solid 5px !important;
         border-image: linear-gradient(to right, #bcc1f8, #bcc1f8, #3ef1ee) 1 !important;
+        .overlay {
+          transition: none;
+        }
+        .caption {
+          .title {
+            font-size: 4.5rem;
+          }
+          .subtitle {
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .nearby-city {
+        border: none !important;
+        .icon {
+          font-size: 4rem;
+        }
+        .title {
+          font-size: 2rem;
+        }
       }
     }
   }

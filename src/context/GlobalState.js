@@ -15,17 +15,17 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //Actions
-  async function searchPlace(country) {
+  async function searchPlace(placeName) {
     try {
       // search place
       const res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${placeName}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
       );
       const { data } = res;
 
       const newTimezone = data.timezone / 3600;
 
-      const newCountryData = {
+      const newPlaceData = {
         name: data.name,
         countryCode: data.sys.country,
         longitude: data.coord.lon,
@@ -42,14 +42,14 @@ export const GlobalProvider = ({ children }) => {
 
       // search cities
       searchCities(
-        newCountryData.latitude,
-        newCountryData.longitude,
-        newCountryData.name
+        newPlaceData.latitude,
+        newPlaceData.longitude,
+        newPlaceData.name
       );
 
       dispatch({
         type: "SEARCH_PLACE",
-        payload: newCountryData,
+        payload: newPlaceData,
       });
     } catch (err) {
       console.log(err);
@@ -66,19 +66,30 @@ export const GlobalProvider = ({ children }) => {
       const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=20&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
       );
-      const cityList = res.data.list;
+      const { list } = res.data;
 
-      const filteredCityList = cityList.filter(
+      const newCityList = list.map((city) => {
+        return {
+          name: city.name,
+          temperature: city.main.temp,
+          weather: city.weather[0].main,
+        };
+      });
+
+      const removeDuplicate = newCityList.filter(
+        (city, index, self) =>
+          index === self.findIndex((c) => c.name === city.name)
+      );
+
+      const cleanCityList = removeDuplicate.filter(
         (city) => city.name !== placeName
       );
 
-      const cleanedCityList = [...new Set(filteredCityList)];
-
-      console.log(cleanedCityList);
+      console.log(cleanCityList);
 
       dispatch({
         type: "SEARCH_NEARBY",
-        payload: cleanedCityList,
+        payload: cleanCityList,
       });
     } catch (err) {
       console.log(err);
@@ -89,46 +100,46 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function searchCity(cityId, temperature, weather) {
-    try {
-      const res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
-      );
-      const { data } = res;
+  // async function searchCity(cityId, temperature, weather) {
+  //   try {
+  //     const res = await axios.get(
+  //       `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
+  //     );
+  //     const { data } = res;
 
-      const newTimezone = data.timezone / 3600;
+  //     const newTimezone = data.timezone / 3600;
 
-      const newCityData = {
-        name: data.name,
-        countryCode: data.sys.country,
-        longitude: data.coord.lon,
-        latitude: data.coord.lat,
-        temperature: Math.round(temperature),
-        weather: weather,
-        timezone: `GMT${newTimezone > 0 ? " +" : " "}${newTimezone}`,
-      };
+  //     const newCityData = {
+  //       name: data.name,
+  //       countryCode: data.sys.country,
+  //       longitude: data.coord.lon,
+  //       latitude: data.coord.lat,
+  //       temperature: Math.round(temperature),
+  //       weather: weather,
+  //       timezone: `GMT${newTimezone > 0 ? " +" : " "}${newTimezone}`,
+  //     };
 
-      // console.log(data);
-      dispatch({
-        type: "SEARCH_CITY",
-        payload: newCityData,
-      });
+  //     // console.log(data);
+  //     dispatch({
+  //       type: "SEARCH_CITY",
+  //       payload: newCityData,
+  //     });
 
-      // search cities
-      searchCities(
-        newCityData.latitude,
-        newCityData.longitude,
-        newCityData.name
-      );
-    } catch (err) {
-      console.log(err);
-      alert("Invalid city");
-      dispatch({
-        type: "SEARCH_ERROR",
-        payload: "Search Error",
-      });
-    }
-  }
+  //     // search cities
+  //     searchCities(
+  //       newCityData.latitude,
+  //       newCityData.longitude,
+  //       newCityData.name
+  //     );
+  //   } catch (err) {
+  //     console.log(err);
+  //     alert("Invalid city");
+  //     dispatch({
+  //       type: "SEARCH_ERROR",
+  //       payload: "Search Error",
+  //     });
+  //   }
+  // }
 
   // async function findPlaceImage(placeName) {
   //   try {
@@ -166,7 +177,6 @@ export const GlobalProvider = ({ children }) => {
         isCountry: state.isCountry,
         searchPlace,
         searchCities,
-        searchCity,
       }}
     >
       {children}
