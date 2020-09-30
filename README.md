@@ -50,6 +50,10 @@ npm i
 npm start
 ```
 
+## Future Update
+- Get an accurate country/city image based on weather, season and/or temperature
+- Get places' description by scraping Wikipedia
+
 ## API Reference
 
 [Current Weather API](https://openweathermap.org/current) <br>
