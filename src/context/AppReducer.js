@@ -13,7 +13,8 @@ export default (state, action) => {
     case "COUNTRY_CHECK":
       return {
         ...state,
-        isCountry: action.payload,
+        isCountry: action.payload.matchCountry,
+        countryName: action.payload.countryName,
       };
     case "SEARCH_CITY":
       return {

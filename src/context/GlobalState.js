@@ -7,6 +7,7 @@ const initialState = {
   placeData: null,
   nearbyData: null,
   isCountry: true,
+  countryName: null,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -68,6 +69,7 @@ export const GlobalProvider = ({ children }) => {
       );
       const { list } = res.data;
 
+      // filter endpoint, remove duplicate, and remove country
       const newCityList = list.map((city) => {
         return {
           name: city.name,
@@ -75,17 +77,15 @@ export const GlobalProvider = ({ children }) => {
           weather: city.weather[0].main,
         };
       });
-
       const removeDuplicate = newCityList.filter(
         (city, index, self) =>
           index === self.findIndex((c) => c.name === city.name)
       );
-
       const cleanCityList = removeDuplicate.filter(
-        (city) => city.name !== placeName
+        (city) => city.name !== placeName && city.name !== state.countryName
       );
 
-      // console.log(cleanCityList);
+      console.log(cleanCityList);
 
       dispatch({
         type: "SEARCH_NEARBY",
@@ -156,17 +156,16 @@ export const GlobalProvider = ({ children }) => {
   //   }
   // }
 
-  async function countryCheck(countryCode, countryName) {
+  async function countryCheck(countryCode, placeName) {
     const res = await axios.get(
       `https://restcountries.eu/rest/v2/alpha/${countryCode}`
     );
-    const matchCountry = res.data.name === countryName;
-
-    // console.log("match code match:", matchCountry);
+    const countryName = res.data.name;
+    const matchCountry = countryName === placeName;
 
     dispatch({
       type: "COUNTRY_CHECK",
-      payload: matchCountry,
+      payload: { matchCountry, countryName },
     });
   }
 
@@ -175,8 +174,8 @@ export const GlobalProvider = ({ children }) => {
       value={{
         placeData: state.placeData,
         nearbyData: state.nearbyData,
-        countryCode: state.countryCode,
         isCountry: state.isCountry,
+        countryName: state.countryName,
         searchPlace,
         searchCities,
         searchCity,
