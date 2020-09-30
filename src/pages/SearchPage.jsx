@@ -5,7 +5,7 @@ import { GlobalContext } from "../context/GlobalState";
 import Cities from "../components/Search/Cities";
 
 export default function SearchPage() {
-  const { placeData } = useContext(GlobalContext);
+  const { placeData, isCountry } = useContext(GlobalContext);
 
   return (
     <main className="search-page bg-dark">
@@ -13,10 +13,6 @@ export default function SearchPage() {
       <div className="banner bg-dark text-white py-4">
         <div className="container">
           <Link className="text-light" to="/">
-            Weather App
-          </Link>
-          <span className="mx-2">/</span>
-          <Link className="text-light" to="/search">
             Search
           </Link>
           <span className="mx-2">/</span>
@@ -35,11 +31,12 @@ export default function SearchPage() {
           <div className="title light mb-2">
             {" "}
             {placeData ? placeData.name : ""}
+            {isCountry ? "" : `, ${placeData.countryCode}`}
           </div>
           <div className="subtitle semi-bold mb-3 text-muted">
             Timezone: {placeData ? placeData.timezone : ""}
           </div>
-          <p className="description text-muted">
+          {/* <p className="description text-muted">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
             assumenda nobis maiores error, necessitatibus, maxime dolores
             libero, quo natus nam labore neque atque dignissimos unde delectus
@@ -51,7 +48,7 @@ export default function SearchPage() {
             exercitationem eius, libero ad porro quis! Quis autem ipsam possimus
             doloremque animi soluta, officiis consequatur laboriosam eveniet
             itaque minus placeat.
-          </p>
+          </p> */}
         </div>
       </div>
 

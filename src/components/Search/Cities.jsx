@@ -5,10 +5,6 @@ import { GlobalContext } from "../../context/GlobalState";
 export default function Cities() {
   const { nearbyData, searchCity } = useContext(GlobalContext);
 
-  if (nearbyData) {
-    console.log(nearbyData);
-  }
-
   return (
     <div className="cities text-white">
       {/* First row */}
@@ -18,7 +14,7 @@ export default function Cities() {
           <div className="mt-3 text-center title">Nearby Cities</div>
         </div>
         {nearbyData &&
-          nearbyData.slice(1, 4).map((city) => (
+          nearbyData.slice(0, 3).map((city) => (
             <div
               className="city col-xl-3 col-md-6 bg-dark p-0"
               key={city.id}
@@ -41,7 +37,7 @@ export default function Cities() {
       {/* second row */}
       <div className="row city-row">
         {nearbyData &&
-          nearbyData.slice(4, 9).map((city) => (
+          nearbyData.slice(3, 7).map((city) => (
             <div
               className="city col-xl-3 col-md-6 bg-dark p-0"
               key={city.id}

@@ -10,6 +10,17 @@ export default (state, action) => {
         ...state,
         nearbyData: action.payload,
       };
+    case "COUNTRY_CHECK":
+      return {
+        ...state,
+        isCountry: action.payload,
+      };
+    case "SEARCH_CITY":
+      return {
+        ...state,
+        placeData: action.payload,
+        isCountry: false,
+      };
 
     default:
       return state;

@@ -6,6 +6,7 @@ import axios from "axios";
 const initialState = {
   placeData: null,
   nearbyData: null,
+  isCountry: true,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -14,8 +15,9 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //Actions
-  async function searchCountry(country) {
+  async function searchPlace(country) {
     try {
+      // search place
       const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
       );
@@ -25,6 +27,7 @@ export const GlobalProvider = ({ children }) => {
 
       const newCountryData = {
         name: data.name,
+        countryCode: data.sys.country,
         longitude: data.coord.lon,
         latitude: data.coord.lat,
         temperature: +data.main.temp,
@@ -32,14 +35,22 @@ export const GlobalProvider = ({ children }) => {
         timezone: `GMT${newTimezone > 0 ? " +" : " "}${newTimezone}`,
       };
 
-      // console.log(data);
+      console.log(data);
+
+      // check if it's a country
+      countryCheck(data.sys.country, data.name);
+
+      // search cities
+      searchCities(
+        newCountryData.latitude,
+        newCountryData.longitude,
+        newCountryData.name
+      );
+
       dispatch({
         type: "SEARCH_PLACE",
         payload: newCountryData,
       });
-
-      // search cities
-      searchCities(newCountryData.latitude, newCountryData.longitude);
     } catch (err) {
       console.log(err);
       alert("Invalid country");
@@ -50,18 +61,24 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function searchCities(lat, lon) {
+  async function searchCities(lat, lon, placeName) {
     try {
       const res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=8&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
+        `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=20&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
       );
-      const data = res.data.list;
+      const cityList = res.data.list;
 
-      // console.log(data);
+      const filteredCityList = cityList.filter(
+        (city) => city.name !== placeName
+      );
+
+      const cleanedCityList = [...new Set(filteredCityList)];
+
+      console.log(cleanedCityList);
 
       dispatch({
         type: "SEARCH_NEARBY",
-        payload: data,
+        payload: cleanedCityList,
       });
     } catch (err) {
       console.log(err);
@@ -83,6 +100,7 @@ export const GlobalProvider = ({ children }) => {
 
       const newCityData = {
         name: data.name,
+        countryCode: data.sys.country,
         longitude: data.coord.lon,
         latitude: data.coord.lat,
         temperature: Math.round(temperature),
@@ -92,12 +110,16 @@ export const GlobalProvider = ({ children }) => {
 
       // console.log(data);
       dispatch({
-        type: "SEARCH_PLACE",
+        type: "SEARCH_CITY",
         payload: newCityData,
       });
 
       // search cities
-      searchCities(newCityData.latitude, newCityData.longitude);
+      searchCities(
+        newCityData.latitude,
+        newCityData.longitude,
+        newCityData.name
+      );
     } catch (err) {
       console.log(err);
       alert("Invalid city");
@@ -108,17 +130,31 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function findPlaceImage(placeName) {
-    try {
-      const res = await axios.get(
-        `https://api.unsplash.com/search/photos?page=1&query=${placeName}&orientation=landscape&client_id=6WvOzBG4EgwiZgc-dApUGD0Fi8csesIJI_OL4uYGM50`
-      );
+  // async function findPlaceImage(placeName) {
+  //   try {
+  //     const res = await axios.get(
+  //       `https://api.unsplash.com/search/photos?page=1&query=${placeName}&orientation=landscape&client_id=6WvOzBG4EgwiZgc-dApUGD0Fi8csesIJI_OL4uYGM50`
+  //     );
 
-      console.log(res.data);
-    } catch (err) {
-      console.log(err);
-      console.log("invalid place name");
-    }
+  //     console.log(res.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //     console.log("invalid place name");
+  //   }
+  // }
+
+  async function countryCheck(countryCode, countryName) {
+    const res = await axios.get(
+      `https://restcountries.eu/rest/v2/alpha/${countryCode}`
+    );
+    const matchCountry = res.data.name === countryName;
+
+    // console.log("match code match:", matchCountry);
+
+    dispatch({
+      type: "COUNTRY_CHECK",
+      payload: matchCountry,
+    });
   }
 
   return (
@@ -126,10 +162,11 @@ export const GlobalProvider = ({ children }) => {
       value={{
         placeData: state.placeData,
         nearbyData: state.nearbyData,
-        searchCountry,
+        countryCode: state.countryCode,
+        isCountry: state.isCountry,
+        searchPlace,
         searchCities,
         searchCity,
-        findPlaceImage,
       }}
     >
       {children}
