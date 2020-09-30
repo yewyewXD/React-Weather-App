@@ -36,7 +36,7 @@ export const GlobalProvider = ({ children }) => {
         timezone: `GMT${newTimezone > 0 ? " +" : " "}${newTimezone}`,
       };
 
-      console.log(data);
+      // console.log(data);
 
       // check if it's a country
       countryCheck(data.sys.country, data.name);
@@ -85,7 +85,7 @@ export const GlobalProvider = ({ children }) => {
         (city) => city.name !== placeName && city.name !== state.countryName
       );
 
-      console.log(cleanCityList);
+      // console.log(cleanCityList);
 
       dispatch({
         type: "SEARCH_NEARBY",

@@ -10,9 +10,54 @@ import {
 } from "react-icons/ri";
 // 50 // 11 // 13 d
 
+import {
+  springBg,
+  rainySpringBg,
+  summerBg,
+  rainySummerBg,
+  autumnBg,
+  rainyAutumnBg,
+  winterBg,
+  rainyWinterBg,
+} from "../../images/weatherBg";
+
 export default function MainDisplay({ placeData }) {
-  const background =
-    "https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1383&q=80";
+  const Atmosphere =
+    "Mist" ||
+    "Smoke" ||
+    "Haze" ||
+    "Dust" ||
+    "Fog" ||
+    "Sand" ||
+    "Dust" ||
+    "Ash" ||
+    "Squall" ||
+    "Tornado";
+
+  const rainyWeather = "Rain" || "Drizzle" || "ThunderStorm" || Atmosphere;
+
+  function getBackgroundByTemp() {
+    if (placeData) {
+      const temp = Math.round(+placeData.temperature);
+      const weather = placeData.weather;
+
+      if (temp >= 24) {
+        // Summer
+        return weather === rainyWeather ? rainySummerBg : summerBg;
+      } else if (temp >= 15 && temp <= 23) {
+        // Autumn
+        return weather === rainyWeather ? rainyAutumnBg : autumnBg;
+      } else if (temp >= 7 && temp <= 14) {
+        // Spring
+        return weather === rainyWeather ? rainySpringBg : springBg;
+      } else {
+        // Winter
+        return weather === rainyWeather ? rainyWinterBg : winterBg;
+      }
+    } else {
+      return winterBg;
+    }
+  }
 
   function getWeatherIcon(weather) {
     switch (weather) {
@@ -24,7 +69,7 @@ export default function MainDisplay({ placeData }) {
         return <FiCloudRain />;
       case "ThunderStorm":
         return <RiThunderstormsLine />;
-      case "Atmosphere":
+      case Atmosphere:
         return <RiTornadoLine />;
       case "Snow":
         return <RiSnowyLine />;
@@ -36,7 +81,7 @@ export default function MainDisplay({ placeData }) {
   return (
     <div
       className="main-display py-5 all-center"
-      style={{ backgroundImage: `url(${background})` }}
+      style={{ backgroundImage: `url(${getBackgroundByTemp()})` }}
     >
       <div className="overlay w-100 position-absolute"></div>
       <div
