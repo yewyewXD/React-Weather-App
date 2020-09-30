@@ -2,14 +2,12 @@
 
 ## Description
 
-V1: A weather web application which shows weather of countries all around the world. <br>
-V2: A weather search app which allows to get a place's and its nearby cities' weather & temperature.<br>
+**V1:** A weather web application which shows weather of countries all around the world. <br>
+**V2:** A weather search app which allows to get a place's and its nearby cities' weather & temperature.<br>
 
 ## Build status
 
-#### Success
-
-[See Live Website](https://rtweather.netlify.app/)
+**Success:** [See Live Website](https://rtweather.netlify.app/)
 
 Started on: 26 Jul 2020 <br>
 Completed on: 28 Jul 2020 <br>
