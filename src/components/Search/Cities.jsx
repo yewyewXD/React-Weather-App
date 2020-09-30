@@ -3,7 +3,7 @@ import { FaCity } from "react-icons/fa";
 import { GlobalContext } from "../../context/GlobalState";
 
 export default function Cities() {
-  const { nearbyData, searchPlace } = useContext(GlobalContext);
+  const { nearbyData, searchCity } = useContext(GlobalContext);
 
   return (
     <div className="cities text-white">
@@ -18,7 +18,9 @@ export default function Cities() {
             <div
               className="city col-xl-3 col-sm-6 bg-dark p-0"
               key={city.name}
-              onClick={() => searchPlace(city.name)}
+              onClick={() =>
+                searchCity(city.name, city.temperature, city.weather)
+              }
             >
               <div className="overlay w-100 h-100 all-center-column"></div>
               <div className="caption all-center-column">
@@ -39,7 +41,9 @@ export default function Cities() {
             <div
               className="city col-xl-3 col-sm-6 bg-dark p-0"
               key={city.name}
-              onClick={() => searchPlace(city.name)}
+              onClick={() =>
+                searchCity(city.name, city.temperature, city.weather)
+              }
             >
               <div className="overlay w-100 h-100 all-center-column"></div>
               <div className="caption all-center-column">

@@ -100,46 +100,48 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  // async function searchCity(cityId, temperature, weather) {
-  //   try {
-  //     const res = await axios.get(
-  //       `https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
-  //     );
-  //     const { data } = res;
+  async function searchCity(cityName, temperature, weather) {
+    try {
+      const res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=9a6f2e544e3a8ce2e1271032a1ec02f8&units=metric`
+      );
+      const { data } = res;
 
-  //     const newTimezone = data.timezone / 3600;
+      const newTimezone = data.timezone / 3600;
 
-  //     const newCityData = {
-  //       name: data.name,
-  //       countryCode: data.sys.country,
-  //       longitude: data.coord.lon,
-  //       latitude: data.coord.lat,
-  //       temperature: Math.round(temperature),
-  //       weather: weather,
-  //       timezone: `GMT${newTimezone > 0 ? " +" : " "}${newTimezone}`,
-  //     };
+      const newCityData = {
+        name: data.name,
+        countryCode: data.sys.country,
+        longitude: data.coord.lon,
+        latitude: data.coord.lat,
+        temperature: temperature,
+        weather: weather,
+        timezone: `GMT${newTimezone > 0 ? " +" : " "}${newTimezone}`,
+      };
 
-  //     // console.log(data);
-  //     dispatch({
-  //       type: "SEARCH_CITY",
-  //       payload: newCityData,
-  //     });
+      // check if it's a country
+      countryCheck(data.sys.country, data.name);
 
-  //     // search cities
-  //     searchCities(
-  //       newCityData.latitude,
-  //       newCityData.longitude,
-  //       newCityData.name
-  //     );
-  //   } catch (err) {
-  //     console.log(err);
-  //     alert("Invalid city");
-  //     dispatch({
-  //       type: "SEARCH_ERROR",
-  //       payload: "Search Error",
-  //     });
-  //   }
-  // }
+      // search cities
+      searchCities(
+        newCityData.latitude,
+        newCityData.longitude,
+        newCityData.name
+      );
+
+      // console.log(data);
+      dispatch({
+        type: "SEARCH_CITY",
+        payload: newCityData,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: "SEARCH_ERROR",
+        payload: "Search Error",
+      });
+    }
+  }
 
   // async function findPlaceImage(placeName) {
   //   try {
@@ -177,6 +179,7 @@ export const GlobalProvider = ({ children }) => {
         isCountry: state.isCountry,
         searchPlace,
         searchCities,
+        searchCity,
       }}
     >
       {children}

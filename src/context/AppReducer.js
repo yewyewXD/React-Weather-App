@@ -19,7 +19,6 @@ export default (state, action) => {
       return {
         ...state,
         placeData: action.payload,
-        isCountry: false,
       };
 
     default:

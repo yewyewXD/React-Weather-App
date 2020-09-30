@@ -13,7 +13,7 @@ export default function SearchPage() {
       <div className="banner bg-dark text-white py-4">
         <div className="container">
           <Link className="text-light" to="/">
-            Search
+            Weather Search
           </Link>
           <span className="mx-2">/</span>
           <Link className="text-light" to="/search">
