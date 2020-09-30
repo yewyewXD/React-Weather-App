@@ -33,7 +33,7 @@ export default function LandingPage() {
             <input
               type="text"
               className="form-control semi-bold mr-sm-3 mr-2"
-              placeholder="Enter a place's name"
+              placeholder="Enter a country or city"
               ref={countryElRef}
               onKeyUp={runPlaceSearch}
             />

@@ -85,7 +85,7 @@ export const GlobalProvider = ({ children }) => {
         (city) => city.name !== placeName
       );
 
-      console.log(cleanCityList);
+      // console.log(cleanCityList);
 
       dispatch({
         type: "SEARCH_NEARBY",
