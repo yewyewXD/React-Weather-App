@@ -1,34 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+
 body {
-  font-family: sans-serif !important;
+  font-family: "Open Sans", sans-serif !important;
   overflow-x: hidden;
 }
-.eachCity {
-  height: 240px;
-  width: 240px;
+
+.light {
+  font-weight: 300;
 }
-.cityTemperature,
-.weatherIcon {
-  height: 30px;
-  width: 30px;
-  padding: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  color: white;
+.regular {
+  font-weight: 400;
 }
-.weatherIcon {
-  height: 60px;
-  width: 60px;
+.semi-bold {
+  font-weight: 600;
 }
-.weatherIcon img {
-  width: 100%;
+.bold {
+  font-weight: 700;
 }
-.hot {
-  background: red;
-}
-.cold {
-  background: blue;
+.extra-bold {
+  font-weight: 800;
 }
 
 .all-center {

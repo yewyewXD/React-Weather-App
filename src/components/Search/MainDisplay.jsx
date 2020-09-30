@@ -9,7 +9,9 @@ export default function MainDisplay({ placeData }) {
     >
       <div
         className={`container ${
-          placeData ? "d-flex justify-content-end" : "all-center"
+          placeData
+            ? "d-flex justify-content-md-end justify-content-center"
+            : "all-center"
         }`}
       >
         <span className="caption text-white text-center all-center-column">
@@ -20,7 +22,7 @@ export default function MainDisplay({ placeData }) {
               <div className="display-1 temperature">
                 {Math.round(placeData.temperature)}&deg;C
               </div>
-              <div className="h4 weather">Mostly Cloudy</div>
+              <div className="h4 weather">{placeData.weather}</div>
             </>
           )}
 

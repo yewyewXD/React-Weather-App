@@ -13,7 +13,7 @@ export default function Cities() {
     <div className="cities text-white">
       {/* First row */}
       <div className="row city-row">
-        <div className="city city-title col-xl-3 col-md-6 bg-dark all-center-column">
+        <div className="city city-title col-xl-3 col-md-6 bg-dark all-center-column p-0">
           <FaCity size="5em" />
           <div className="display-4 mt-3 text-center">Nearby Cities</div>
         </div>

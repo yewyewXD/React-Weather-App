@@ -19,10 +19,6 @@
         &:nth-child(odd) {
           border-top: 5px solid;
         }
-        &:first-child {
-          cursor: initial !important;
-          border: none;
-        }
       }
 
       &:last-child .city:nth-child(odd) {
@@ -31,11 +27,13 @@
 
       .city-title {
         background: linear-gradient(to bottom right, #bcc1f8, #bcc1f8, #3ef1ee);
+        cursor: initial !important;
+        border: none !important;
       }
 
       .city {
         height: 50vh;
-        border-image: linear-gradient(45deg, #bcc1f8, #3ef1ee) 1;
+        border-image: linear-gradient(to right, #bcc1f8, #bcc1f8, #3ef1ee) 1;
         cursor: pointer;
         display: flex !important;
         justify-content: center;
@@ -60,6 +58,30 @@
         .caption {
           z-index: 0;
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .search-page {
+    .cities {
+      height: 100vh;
+
+      .city {
+        border: none !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .search-page {
+    .cities {
+      .city {
+        height: 100vw !important;
+        border-bottom: solid 5px !important;
+        border-image: linear-gradient(to right, #bcc1f8, #bcc1f8, #3ef1ee) 1 !important;
       }
     }
   }

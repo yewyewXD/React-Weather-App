@@ -108,6 +108,19 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function findPlaceImage(placeName) {
+    try {
+      const res = await axios.get(
+        `https://api.unsplash.com/search/photos?page=1&query=${placeName}&orientation=landscape&client_id=6WvOzBG4EgwiZgc-dApUGD0Fi8csesIJI_OL4uYGM50`
+      );
+
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+      console.log("invalid place name");
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -116,6 +129,7 @@ export const GlobalProvider = ({ children }) => {
         searchCountry,
         searchCities,
         searchCity,
+        findPlaceImage,
       }}
     >
       {children}
