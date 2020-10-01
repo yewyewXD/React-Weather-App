@@ -59,6 +59,15 @@ touch apiKeys.js
 
 > In "apiKey.js", export your API key:
 
+- If you're using VS Code, you can cd into the file start editing
+
+```bash
+cd apiKeys.js
+code .
+```
+
+- Paste in the code and replace pasteyourapikeyhere with your Open Weather API key
+
 ```bash
 module.exports = {
   API_KEY: "pasteyourapikeyhere",
