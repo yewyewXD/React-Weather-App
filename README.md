@@ -52,7 +52,7 @@ npm i
 
 ```bash
 cd src
-md config
+mkdir config
 cd config
 touch apiKeys.js
 ```
