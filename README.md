@@ -66,7 +66,7 @@ cd apiKeys.js
 code .
 ```
 
-- Paste in the code and replace pasteyourapikeyhere with your Open Weather API key
+- Paste in the code and replace pasteyourapikeyhere with your OpenWeather API key
 
 ```bash
 module.exports = {
