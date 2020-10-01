@@ -22,20 +22,46 @@ import {
 } from "../../images/weatherBg";
 
 export default function MainDisplay({ placeData }) {
-  const Atmosphere =
-    "Mist" ||
-    "Smoke" ||
-    "Haze" ||
-    "Dust" ||
-    "Fog" ||
-    "Sand" ||
-    "Dust" ||
-    "Ash" ||
-    "Squall" ||
-    "Tornado";
+  function darkAtmosphereCheck(weather) {
+    if (
+      weather === "Mist" ||
+      "Smoke" ||
+      "Haze" ||
+      "Dust" ||
+      "Fog" ||
+      "Sand" ||
+      "Dust" ||
+      "Ash" ||
+      "Squall" ||
+      "Tornado"
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-  const rainyWeather = "Rain" || "Drizzle" || "ThunderStorm" || Atmosphere;
-
+  function rainyWeatherCheck(weather) {
+    if (
+      weather === "Rain" ||
+      "Drizzle" ||
+      "ThunderStorm" ||
+      "Mist" ||
+      "Smoke" ||
+      "Haze" ||
+      "Dust" ||
+      "Fog" ||
+      "Sand" ||
+      "Dust" ||
+      "Ash" ||
+      "Squall" ||
+      "Tornado"
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   function getBackgroundByTemp() {
     if (placeData) {
       const temp = Math.round(+placeData.temperature);
@@ -43,23 +69,23 @@ export default function MainDisplay({ placeData }) {
 
       if (temp >= 24) {
         // Summer
-        return weather === rainyWeather ? rainySummerBg : summerBg;
+        return rainyWeatherCheck(weather) ? rainySummerBg : summerBg;
       } else if (temp >= 15 && temp <= 23) {
         // Autumn
-        return weather === rainyWeather ? rainyAutumnBg : autumnBg;
+        return rainyWeatherCheck(weather) ? rainyAutumnBg : autumnBg;
       } else if (temp >= 7 && temp <= 14) {
         // Spring
-        return weather === rainyWeather ? rainySpringBg : springBg;
+        return rainyWeatherCheck(weather) ? rainySpringBg : springBg;
       } else {
         // Winter
-        return weather === rainyWeather ? rainyWinterBg : winterBg;
+        return rainyWeatherCheck(weather) ? rainyWinterBg : winterBg;
       }
     } else {
       return winterBg;
     }
   }
 
-  function getWeatherIcon(weather) {
+  function handleGetWeatherIcon(weather) {
     switch (weather) {
       case "Clear":
         return <BiSun />;
@@ -69,7 +95,7 @@ export default function MainDisplay({ placeData }) {
         return <FiCloudRain />;
       case "ThunderStorm":
         return <RiThunderstormsLine />;
-      case Atmosphere:
+      case "Tornado":
         return <RiTornadoLine />;
       case "Snow":
         return <RiSnowyLine />;
@@ -100,7 +126,7 @@ export default function MainDisplay({ placeData }) {
                 {Math.round(placeData.temperature)}&deg;C
               </div>
               <div className="subtitle light weather all-center">
-                {getWeatherIcon(placeData.weather)}
+                {handleGetWeatherIcon(placeData.weather)}
                 <span className="m-0 ml-2">{placeData.weather}</span>
               </div>
             </>
