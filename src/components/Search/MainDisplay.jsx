@@ -22,46 +22,25 @@ import {
 } from "../../images/weatherBg";
 
 export default function MainDisplay({ placeData }) {
-  function darkAtmosphereCheck(weather) {
-    if (
-      weather === "Mist" ||
-      "Smoke" ||
-      "Haze" ||
-      "Dust" ||
-      "Fog" ||
-      "Sand" ||
-      "Dust" ||
-      "Ash" ||
-      "Squall" ||
-      "Tornado"
-    ) {
-      return true;
-    } else {
-      return false;
-    }
+  const extremeWeather = [
+    "Mist",
+    "Smoke",
+    "Haze",
+    "Dust",
+    "Fog",
+    "Sand",
+    "Dust",
+    "Ash",
+    "Squall",
+    "Tornado",
+  ];
+
+  const rainyWeather = ["Rain", "Drizzle"];
+
+  function handleDarkWeatherCheck(weather) {
+    return rainyWeather.includes(weather) || extremeWeather.includes(weather);
   }
 
-  function rainyWeatherCheck(weather) {
-    if (
-      weather === "Rain" ||
-      "Drizzle" ||
-      "ThunderStorm" ||
-      "Mist" ||
-      "Smoke" ||
-      "Haze" ||
-      "Dust" ||
-      "Fog" ||
-      "Sand" ||
-      "Dust" ||
-      "Ash" ||
-      "Squall" ||
-      "Tornado"
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
   function getBackgroundByTemp() {
     if (placeData) {
       const temp = Math.round(+placeData.temperature);
@@ -69,16 +48,16 @@ export default function MainDisplay({ placeData }) {
 
       if (temp >= 24) {
         // Summer
-        return rainyWeatherCheck(weather) ? rainySummerBg : summerBg;
+        return handleDarkWeatherCheck(weather) ? rainySummerBg : summerBg;
       } else if (temp >= 15 && temp <= 23) {
         // Autumn
-        return rainyWeatherCheck(weather) ? rainyAutumnBg : autumnBg;
+        return handleDarkWeatherCheck(weather) ? rainyAutumnBg : autumnBg;
       } else if (temp >= 7 && temp <= 14) {
         // Spring
-        return rainyWeatherCheck(weather) ? rainySpringBg : springBg;
+        return handleDarkWeatherCheck(weather) ? rainySpringBg : springBg;
       } else {
         // Winter
-        return rainyWeatherCheck(weather) ? rainyWinterBg : winterBg;
+        return handleDarkWeatherCheck(weather) ? rainyWinterBg : winterBg;
       }
     } else {
       return winterBg;
@@ -86,21 +65,20 @@ export default function MainDisplay({ placeData }) {
   }
 
   function handleGetWeatherIcon(weather) {
-    switch (weather) {
-      case "Clear":
-        return <BiSun />;
-      case "Clouds":
-        return <FiCloud />;
-      case "Rain" || "Drizzle":
-        return <FiCloudRain />;
-      case "ThunderStorm":
-        return <RiThunderstormsLine />;
-      case "Tornado":
-        return <RiTornadoLine />;
-      case "Snow":
-        return <RiSnowyLine />;
-      default:
-        return "";
+    if (weather === "Clear") {
+      return <BiSun />;
+    } else if (weather === "Clouds") {
+      return <FiCloud />;
+    } else if (rainyWeather.includes(weather)) {
+      return <FiCloudRain />;
+    } else if (weather === "ThunderStorm") {
+      return <RiThunderstormsLine />;
+    } else if (extremeWeather.includes(weather)) {
+      return <RiTornadoLine />;
+    } else if (weather === "Snow") {
+      return <RiSnowyLine />;
+    } else {
+      return "";
     }
   }
 
