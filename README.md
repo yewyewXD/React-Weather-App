@@ -7,11 +7,11 @@
 
 ## Build status
 
-**Success:** [See Live Website](https://rtweather.netlify.app/)
+**Success:** [See Live](https://rtweather.netlify.app/)
 
 Started on: 26 Jul 2020 <br>
 Completed on: 28 Jul 2020 <br>
-Last modified on: 30 September 2020 (V2)<br>
+Last modified on: 1 October 2020 <br>
 
 ## Screenshots (V1 and V2)
 
@@ -34,9 +34,13 @@ Last modified on: 30 September 2020 (V2)<br>
 
 ## How to use it locally
 
-First, clone the repository, then:
+First, sign up[creating an account](https://home.openweathermap.org/users/sign_up) for an OpenWeather account<br>
 
-> cd into the working directory and install dependencies
+Then, you can get your free API key [here](https://home.openweathermap.org/api_keys)<br>
+
+Now, clone the repository, then:
+
+> cd into the working directory and install dependencies:
 
 ```bash
 cd React-Weather-App
@@ -44,13 +48,34 @@ cd React-Weather-App
 npm i
 ```
 
-> Run the app
+> Create a "config" folder with an "apiKeys.js" file in it:
 
 ```bash
+cd src
+md config
+cd config
+touch apiKeys.js
+```
+
+> In "apiKey.js", export your API key:
+
+```bash
+module.exports = {
+  API_KEY: "pasteyourapikeyhere",
+};
+```
+
+> Back to the root directory and run the app:
+
+```bash
+cd ..
+cd ..
+cd ..
 npm start
 ```
 
 ## Future Update
+
 - Get an accurate country/city image based on weather, season and/or temperature
 - Get places' description by scraping Wikipedia
 
