@@ -33,10 +33,11 @@ Last modified on: 1 October 2020 <br>
 - Get nearby cities and also their weather & temperature info
 
 ## How to use it locally
+> Get a free OpenWeather API key
 
-First, sign up[creating an account](https://home.openweathermap.org/users/sign_up) for an OpenWeather account<br>
+First, [sign up](https://home.openweathermap.org/users/sign_up) for an OpenWeather account.<br>
 
-Then, you can get your free API key [here](https://home.openweathermap.org/api_keys)<br>
+Then, you can get your free API key [here](https://home.openweathermap.org/api_keys).<br>
 
 Now, clone the repository, then:
 
@@ -62,7 +63,6 @@ touch apiKeys.js
 - If you're using VS Code, you can cd into the file start editing
 
 ```bash
-cd apiKeys.js
 code .
 ```
 
@@ -95,5 +95,8 @@ npm start
 
 ## Credits
 
-Initiative Inspiration: Angel John <br>
-[Design Inspiration](https://www.behance.net/gallery/12748107/Weather-Dashboard-Global-Outlook) <br>
+##### Initiative Inspiration: 
+Angel John <br>
+
+##### Design Inspiration
+[Dashboard](https://www.behance.net/gallery/12748107/Weather-Dashboard-Global-Outlook) <br>
