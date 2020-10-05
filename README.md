@@ -11,7 +11,7 @@
 
 Started on: 26 Jul 2020 <br>
 Completed on: 28 Jul 2020 <br>
-Last modified on: 1 October 2020 <br>
+Last modified on: 5 October 2020 <br>
 
 ## Screenshots (V1 and V2)
 
