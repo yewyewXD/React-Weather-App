@@ -25,6 +25,7 @@ Last modified on: 1 October 2020 <br>
 ## Tech/framework used
 
 - React.js
+- Bootstrap
 - Sass
 
 ## Features
