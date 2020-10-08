@@ -21,7 +21,7 @@ export default function LandingPage() {
   return (
     <main className="landing-page all-center-column">
       <div className="container">
-        <div className="caption text-center text-white mb-5">
+        <div className="caption text-center text-white mb-sm-5 mb-4">
           <div className="title light">Realtime Weather</div>
           <div className="subtitle bold text-uppercase">
             from anywhere around the world
