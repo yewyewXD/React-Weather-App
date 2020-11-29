@@ -1,7 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import axios from "axios";
-import { API_KEY } from "../config/apiKeys";
 
 // Initial state
 const initialState = {
@@ -21,7 +20,7 @@ export const GlobalProvider = ({ children }) => {
     try {
       // search place
       const res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${placeName}&appid=${API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${placeName}&appid=${process.env.REACT_API_KEY}&units=metric`
       );
       const { data } = res;
 
@@ -66,7 +65,7 @@ export const GlobalProvider = ({ children }) => {
   async function searchCities(lat, lon, placeName) {
     try {
       const res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=20&appid=${API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=20&appid=${process.env.REACT_API_KEY}&units=metric`
       );
       const { list } = res.data;
 
@@ -104,7 +103,7 @@ export const GlobalProvider = ({ children }) => {
   async function searchCity(cityName, temperature, weather) {
     try {
       const res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.REACT_API_KEY}&units=metric`
       );
       const { data } = res;
 
