@@ -51,39 +51,15 @@ cd React-Weather-App
 npm i
 ```
 
-> Create a "config" folder with an "apiKeys.js" file in it:
+> Create a ".env" file in the root folder, then add this:
 
 ```bash
-cd src
-mkdir config
-cd config
-touch apiKeys.js
+REACT_APP_API_KEY=`paste your api key here`
 ```
-
-> In "apiKey.js", export your API key:
-
-- If you're using VS Code, you can cd into the file start editing
-
-```bash
-code .
-```
-
-- Paste in the code and replace pasteyourapikeyhere with your OpenWeather API key
-
-```bash
-module.exports = {
-  API_KEY: "pasteyourapikeyhere",
-};
-```
-
-Update: import your API_KEY into `src\context\GlobalState.js` to replace `REACT_APP_API_KEY`
 
 > Back to the root directory and run the app:
 
 ```bash
-cd ..
-cd ..
-cd ..
 npm start
 ```
 
