@@ -11,7 +11,7 @@
 
 Started on: 26 Jul 2020 <br>
 Completed on: 28 Jul 2020 <br>
-Last modified on: 9 October 2020 <br>
+Last modified on: 29 Nov 2020 <br>
 
 ## Screenshots (V1 and V2)
 
@@ -75,6 +75,8 @@ module.exports = {
   API_KEY: "pasteyourapikeyhere",
 };
 ```
+
+Update: import your API_KEY into `src\context\GlobalState.js` to replace `REACT_APP_API_KEY`
 
 > Back to the root directory and run the app:
 
