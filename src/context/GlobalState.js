@@ -19,15 +19,44 @@ export const GlobalProvider = ({ children }) => {
   async function searchPlace(placeName) {
     try {
       // search place
-      const res = await axios.get(
+      const weatherResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${placeName}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
       );
-      const { data } = res;
+      const { data } = weatherResponse;
 
       const newTimezone = data.timezone / 3600;
 
+      // get place info from wikipedia
+      let placeDescription = "";
+      try {
+        const wikiResponse = await axios.get(
+          `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&origin=*&titles=${placeName}`
+        );
+
+        const wikiPageId = Object.keys(wikiResponse.data.query.pages)[0];
+        const wikiContent = wikiResponse.data.query.pages[wikiPageId].extract;
+        let trimResult = "";
+        let level = 0;
+        for (var index = 0; index < wikiContent.length; index++) {
+          var character = wikiContent.charAt(index);
+          if (character === "(") level++;
+
+          if (level === 0) trimResult += character;
+
+          if (character === ")") level--;
+        }
+
+        const trimmedContent = trimResult.replace(/\s{2,}/g, " ");
+        const secondPeriodIndex = trimmedContent.split(".", 2).join(".").length;
+        const finalContent = trimmedContent.substr(0, secondPeriodIndex + 1);
+        placeDescription = finalContent;
+      } catch {
+        console.log(`no wikipedia data for ${placeName}`);
+      }
+
       const newPlaceData = {
         name: data.name,
+        description: placeDescription,
         countryCode: data.sys.country,
         longitude: data.coord.lon,
         latitude: data.coord.lat,
@@ -161,7 +190,7 @@ export const GlobalProvider = ({ children }) => {
       `https://restcountries.eu/rest/v2/alpha/${countryCode}`
     );
     const countryName = res.data.name;
-    const matchCountry = countryName === placeName;
+    const matchCountry = countryName.toLowerCase() === placeName.toLowerCase();
 
     dispatch({
       type: "COUNTRY_CHECK",
