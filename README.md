@@ -72,6 +72,7 @@ npm start
 
 [Current Weather API](https://openweathermap.org/current) <br>
 [REST Countries API](https://restcountries.eu/) <br>
+[MediaWiki API](https://en.wikipedia.org/w/api.php?action=help&modules=query%2Bextracts)
 
 ## Credits
 
