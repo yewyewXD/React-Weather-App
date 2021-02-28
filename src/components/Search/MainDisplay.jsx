@@ -104,7 +104,7 @@ export default function MainDisplay({ placeData, isLoadingWeather }) {
         <span
           className="caption text-white text-center all-center-column"
           style={{
-            filter: isLoadingWeather ? "blur(5px)" : "none",
+            filter: placeData && isLoadingWeather ? "blur(5px)" : "none",
           }}
         >
           {/* If we have data */}
@@ -122,9 +122,11 @@ export default function MainDisplay({ placeData, isLoadingWeather }) {
           )}
 
           {/* If we don't have data */}
-          {!placeData && (
-            <div className="subtitle semi-bold">The search result is empty</div>
-          )}
+          <div className="subtitle semi-bold">
+            {!placeData && !isLoadingWeather && "The search result is empty"}
+
+            {!placeData && isLoadingWeather && "Loading ..."}
+          </div>
         </span>
       </div>
     </div>
