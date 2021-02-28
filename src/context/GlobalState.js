@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import axios from "axios";
+import { getWikiContent } from "./utils/wikipedia";
 
 // Initial state
 const initialState = {
@@ -32,24 +33,7 @@ export const GlobalProvider = ({ children }) => {
         const wikiResponse = await axios.get(
           `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&origin=*&titles=${placeName}`
         );
-
-        const wikiPageId = Object.keys(wikiResponse.data.query.pages)[0];
-        const wikiContent = wikiResponse.data.query.pages[wikiPageId].extract;
-        let trimResult = "";
-        let level = 0;
-        for (var index = 0; index < wikiContent.length; index++) {
-          var character = wikiContent.charAt(index);
-          if (character === "(") level++;
-
-          if (level === 0) trimResult += character;
-
-          if (character === ")") level--;
-        }
-
-        const trimmedContent = trimResult.replace(/\s{2,}/g, " ");
-        const secondPeriodIndex = trimmedContent.split(".", 2).join(".").length;
-        const finalContent = trimmedContent.substr(0, secondPeriodIndex + 1);
-        placeDescription = finalContent;
+        placeDescription = getWikiContent(wikiResponse);
       } catch {
         console.log(`no wikipedia data for ${placeName}`);
       }
@@ -145,24 +129,7 @@ export const GlobalProvider = ({ children }) => {
         const wikiResponse = await axios.get(
           `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&origin=*&titles=${cityName}`
         );
-
-        const wikiPageId = Object.keys(wikiResponse.data.query.pages)[0];
-        const wikiContent = wikiResponse.data.query.pages[wikiPageId].extract;
-        let trimResult = "";
-        let level = 0;
-        for (var index = 0; index < wikiContent.length; index++) {
-          var character = wikiContent.charAt(index);
-          if (character === "(") level++;
-
-          if (level === 0) trimResult += character;
-
-          if (character === ")") level--;
-        }
-
-        const trimmedContent = trimResult.replace(/\s{2,}/g, " ");
-        const secondPeriodIndex = trimmedContent.split(".", 2).join(".").length;
-        const finalContent = trimmedContent.substr(0, secondPeriodIndex + 1);
-        placeDescription = finalContent;
+        placeDescription = getWikiContent(wikiResponse);
       } catch {
         console.log(`no wikipedia data for ${cityName}`);
       }
