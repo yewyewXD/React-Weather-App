@@ -101,7 +101,12 @@ export default function MainDisplay({ placeData, isLoadingWeather }) {
             : "all-center"
         }`}
       >
-        <span className="caption text-white text-center all-center-column">
+        <span
+          className="caption text-white text-center all-center-column"
+          style={{
+            filter: isLoadingWeather ? "blur(5px)" : "none",
+          }}
+        >
           {/* If we have data */}
           {placeData && (
             <>
