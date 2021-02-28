@@ -11,7 +11,7 @@
 
 Started on: 26 Jul 2020 <br>
 Completed on: 28 Jul 2020 <br>
-Last modified on: 29 Nov 2020 <br>
+Last modified on: 28 Feb 2021 <br>
 
 ## Screenshots (V1 and V2)
 
@@ -32,6 +32,7 @@ Last modified on: 29 Nov 2020 <br>
 
 - Get weather & temperature info
 - Get nearby cities and also their weather & temperature info
+- Get place description (if available on wikipedia)
 
 ## How to use it locally
 
@@ -66,7 +67,6 @@ npm start
 ## Future Update
 
 - Get an accurate country/city image based on weather, season and/or temperature
-- Get places' description by scraping Wikipedia
 
 ## API Reference
 
