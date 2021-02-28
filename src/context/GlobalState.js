@@ -113,11 +113,19 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  let cityWeatherCancelToken;
   async function searchCity(cityName, temperature, weather) {
+    // prevent spam, cancel awaiting but unneeded requests
+    if (typeof cityWeatherCancelToken !== typeof undefined) {
+      cityWeatherCancelToken.cancel("Canceled previous city weather request");
+    }
+    cityWeatherCancelToken = axios.CancelToken.source();
+
     try {
       // search city
       const res = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.REACT_APP_API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.REACT_APP_API_KEY}&units=metric`,
+        { cancelToken: cityWeatherCancelToken.token }
       );
       const { data } = res;
 
