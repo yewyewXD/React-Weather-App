@@ -21,7 +21,7 @@ import {
   rainyWinterBg,
 } from "../../images/weatherBg";
 
-export default function MainDisplay({ placeData }) {
+export default function MainDisplay({ placeData, isLoadingWeather }) {
   const extremeWeather = [
     "Mist",
     "Smoke",
@@ -83,11 +83,17 @@ export default function MainDisplay({ placeData }) {
   }
 
   return (
-    <div
-      className="main-display py-5 all-center"
-      style={{ backgroundImage: `url(${getBackgroundByTemp()})` }}
-    >
-      <div className="overlay w-100 position-absolute"></div>
+    <div className="main-display py-5 all-center position-relative">
+      <div
+        className="background h-100 w-100 position-absolute"
+        style={{
+          backgroundImage: `url(${getBackgroundByTemp()})`,
+          filter: isLoadingWeather ? "blur(5px)" : "none",
+        }}
+      ></div>
+
+      <div className="overlay h-100 w-100 position-absolute"></div>
+
       <div
         className={`container ${
           placeData

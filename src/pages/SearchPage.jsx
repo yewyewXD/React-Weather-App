@@ -24,7 +24,7 @@ export default function SearchPage() {
       </div>
 
       {/* main display */}
-      <MainDisplay placeData={placeData} />
+      <MainDisplay placeData={placeData} isLoadingWeather={isLoadingWeather} />
 
       {/* country overview  */}
       <div className="country-overview py-5 bg-dark text-white">

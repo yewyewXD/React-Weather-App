@@ -1,13 +1,14 @@
 .search-page {
   .main-display {
     height: 50vh;
-    background-position: 50% 85%;
-    background-size: cover;
-    border-bottom: 5px solid;
-    border-image: linear-gradient(45deg, #bcc1f8, #3ef1ee) 1;
+    overflow: hidden;
+
+    .background {
+      background-position: 50% 85%;
+      background-size: cover;
+    }
 
     .overlay {
-      height: 50vh;
       background: black;
       opacity: 0.6;
     }
@@ -25,6 +26,9 @@
   }
 
   .country-overview {
+    border-top: 5px solid;
+    border-image: linear-gradient(45deg, #bcc1f8, #3ef1ee) 1;
+
     .title {
       font-size: 3rem;
     }
