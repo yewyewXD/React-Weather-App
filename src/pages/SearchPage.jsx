@@ -37,7 +37,7 @@ export default function SearchPage() {
             Timezone: {placeData ? placeData.timezone : ""}
           </div>
           {placeData?.description && (
-            <p className="description text-light">{placeData.description}</p>
+            <p className="description">{placeData.description}</p>
           )}
         </div>
       </div>
