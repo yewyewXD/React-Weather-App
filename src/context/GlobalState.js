@@ -9,6 +9,7 @@ const initialState = {
   nearbyData: null,
   isCountry: true,
   countryName: null,
+  isLoadingWeather: false,
 };
 
 export const GlobalContext = createContext(initialState);
@@ -18,6 +19,13 @@ export const GlobalProvider = ({ children }) => {
 
   //Actions
   async function searchPlace(placeName) {
+    if (!state.isLoadingWeather) {
+      dispatch({
+        type: "UPDATE_LOADING_WEATHER",
+        payload: true,
+      });
+    }
+
     try {
       // search place
       const weatherResponse = await axios.get(
@@ -115,6 +123,13 @@ export const GlobalProvider = ({ children }) => {
 
   let cityWeatherCancelToken;
   async function searchCity(cityName, temperature, weather) {
+    if (!state.isLoadingWeather) {
+      dispatch({
+        type: "UPDATE_LOADING_WEATHER",
+        payload: true,
+      });
+    }
+
     // prevent spam, cancel awaiting but unneeded requests
     if (typeof cityWeatherCancelToken !== typeof undefined) {
       cityWeatherCancelToken.cancel("Canceled previous city weather request");
@@ -210,6 +225,7 @@ export const GlobalProvider = ({ children }) => {
         nearbyData: state.nearbyData,
         isCountry: state.isCountry,
         countryName: state.countryName,
+        isLoadingWeather: state.isLoadingWeather,
         searchPlace,
         searchCities,
         searchCity,

@@ -4,22 +4,39 @@ const AppReducer = (state, action) => {
       return {
         ...state,
         placeData: action.payload,
+        isLoadingWeather: false,
       };
+
     case "SEARCH_NEARBY":
       return {
         ...state,
         nearbyData: action.payload,
       };
+
     case "COUNTRY_CHECK":
       return {
         ...state,
         isCountry: action.payload.matchCountry,
         countryName: action.payload.countryName,
       };
+
     case "SEARCH_CITY":
       return {
         ...state,
         placeData: action.payload,
+        isLoadingWeather: false,
+      };
+
+    case "UPDATE_LOADING_WEATHER":
+      return {
+        ...state,
+        isLoadingWeather: action.payload,
+      };
+
+    case "UPDATE_LOADING_WIKI":
+      return {
+        ...state,
+        isLoadingWiki: action.payload,
       };
 
     default:
