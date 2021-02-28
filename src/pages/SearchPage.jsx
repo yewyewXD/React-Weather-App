@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import MainDisplay from "../components/Search/MainDisplay";
 import { GlobalContext } from "../context/GlobalState";
 import Cities from "../components/Search/Cities";
+import Spinner from "react-loader-spinner";
 
 export default function SearchPage() {
-  const { placeData, isCountry } = useContext(GlobalContext);
+  const { placeData, isCountry, isLoadingWeather } = useContext(GlobalContext);
 
   return (
     <main className="search-page bg-dark">
@@ -28,16 +29,32 @@ export default function SearchPage() {
       {/* country overview  */}
       <div className="country-overview py-5 bg-dark text-white">
         <div className="container">
-          <div className="title light mb-2">
-            {" "}
-            {placeData ? placeData.name : ""}
-            {isCountry ? "" : `, ${placeData.countryCode}`}
-          </div>
-          <div className="subtitle semi-bold mb-3 text-muted">
-            Timezone: {placeData ? placeData.timezone : ""}
-          </div>
-          {placeData?.description && (
-            <p className="description">{placeData.description}</p>
+          {isLoadingWeather ? (
+            <div className="all-center py-4">
+              <Spinner
+                type="ThreeDots"
+                color="#6ae0f2"
+                height={120}
+                width={120}
+              />
+            </div>
+          ) : (
+            <>
+              <div className="title light mb-2">
+                {placeData ? placeData.name : ""}
+                {isCountry ? "" : `, ${placeData.countryCode}`}
+              </div>
+              <div className="subtitle semi-bold mb-3 text-muted">
+                {!isLoadingWeather && !placeData ? (
+                  <>There's no result yet</>
+                ) : (
+                  <>Timezone: {placeData ? placeData.timezone : ""}</>
+                )}
+              </div>
+              {placeData?.description && (
+                <p className="description">{placeData.description}</p>
+              )}
+            </>
           )}
         </div>
       </div>
