@@ -7,7 +7,7 @@
 
 ## Build status
 
-**Success:** [See Live](https://rtweather.netlify.app/)
+**Failed**
 
 Started on: 26 Jul 2020 <br>
 Completed on: 28 Jul 2020 <br>
